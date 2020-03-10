@@ -9,7 +9,7 @@ class MyHTMLParser(HTMLParser):
         self.IsA = False
         self.IsKey = False
         self.IsValue = False
-        self.IsTd = True
+        self.IsTd = False
         self.key = ''
         self.color = dict()
 
@@ -30,6 +30,8 @@ class MyHTMLParser(HTMLParser):
         if (tag == 'a'):
             self.IsA = False
             self.IsKey = False
+            self.IsValue = False
+        if (tag == 'td'):
             self.IsTd = False
         if (tag == 'tbody'):
             self.IsTbody = False
@@ -54,3 +56,5 @@ myparser.feed(html)
 
 for k, v in myparser.color.items():
     print(k, v)
+
+print(len(myparser.color))

@@ -4,6 +4,7 @@ import re
 
 
 class MyHTMLParser(HTMLParser):
+
     IsBody = False
 
     def handle_starttag(self, tag, attrs):
