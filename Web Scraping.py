@@ -18,7 +18,6 @@ class MyHTMLParser(HTMLParser):
             self.IsTbody = True
         if (tag == 'td'):
             self.IsTd = True
-
         if(tag == 'a' and attrs[0][0] == 'class'):
             self.IsA = True
             self.IsKey = True
