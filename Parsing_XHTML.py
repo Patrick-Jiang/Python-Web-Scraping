@@ -4,28 +4,24 @@ import re
 
 
 class MyHTMLParser(HTMLParser):
-    lsStartTags = list()
-    lsEndTags = list()
-    lsData = list()
+    IsBody = False
 
     def handle_starttag(self, tag, attrs):
-        self.lsStartTags.append(tag)
+        if (tag == 'body'):
+            self.IsBody = True
 
     def handle_endtag(self, tag):
-        self.lsEndTags.append(tag)
+        if (tag == 'body'):
+            self.IsBody = False
 
     def handle_data(self, data):
-        self.lsData.append(data)
+        if(self.IsBody):
+            print(data[20:34])
 
 
 myparser = MyHTMLParser()
-
 with urllib.request.urlopen('http://checkip.dyndns.org/') as response:
     html = str(response.read())
 
+
 myparser.feed(html)
-
-ip = re.compile("\d{1,3}\.\d{1,3}\.\d{1,3}\.\d{1,3}")
-ip_address = ip.search(myparser.lsData[2]).group()
-
-print(ip_address)
