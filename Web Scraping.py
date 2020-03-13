@@ -1,5 +1,6 @@
 from html.parser import HTMLParser
 import urllib.request
+import pprint
 
 
 class MyHTMLParser(HTMLParser):
@@ -50,10 +51,8 @@ myparser = MyHTMLParser()
 with urllib.request.urlopen('https://www.colorhexa.com/color-names') as response:
     html = str(response.read())
 
-
 myparser.feed(html)
 
-for k, v in myparser.color.items():
-    print(k, v)
+pprint.pprint(myparser.color)
 
-print(len(myparser.color))
+print ("There are total {:0} colors.".format(len(myparser.color)))
